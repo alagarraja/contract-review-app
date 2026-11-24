@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Review</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14l2 2 4-4"/></svg>
+    </div>
+    <h1>Contract Review</h1>
+    <button id="replace-btn" class="btn-secondary" hidden>Upload a different file</button>
+  </header>
+
+  <main class="layout">
+    <!-- Left: contract preview -->
+    <section class="panel contract-panel" aria-label="Contract preview">
+      <div class="panel-header">
+        <h2>Contract</h2>
+        <div id="file-info" class="file-info" hidden>
+          <span id="file-name" class="file-name"></span>
+          <span id="file-size" class="file-size"></span>
+          <a id="open-link" class="open-link" target="_blank" rel="noopener">Open in new tab</a>
+        </div>
+      </div>
+
+      <label id="drop-zone" class="drop-zone" for="file-input">
+        <input id="file-input" type="file" accept="application/pdf,.pdf" class="sr-only">
+        <svg class="drop-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="drop-title">Drop a PDF contract here</p>
+        <p class="drop-sub">or <span class="link">browse your files</span></p>
+        <p class="drop-hint">PDF files only</p>
+        <p id="upload-error" class="upload-error" role="alert"></p>
+      </label>
+
+      <div id="viewer-wrap" class="viewer-wrap" hidden>
+        <iframe id="pdf-viewer" class="pdf-viewer" title="Uploaded contract"></iframe>
+      </div>
+    </section>
+
+    <!-- Right: chat -->
+    <section class="panel chat-panel" aria-label="Contract chat">
+      <div class="panel-header">
+        <h2>Ask about this contract</h2>
+        <span id="status" class="status"><span class="dot"></span><span id="status-text">No contract yet</span></span>
+      </div>
+
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="message assistant">Hi! Upload a contract on the left, then ask me anything about it.</div>
+      </div>
+
+      <div class="composer">
+        <div class="chips" id="chips">
+          <button type="button" class="chip">Summarize key terms</button>
+          <button type="button" class="chip">Find risky clauses</button>
+          <button type="button" class="chip">What are the payment terms?</button>
+        </div>
+        <form id="chat-form" class="chat-form">
+          <label for="chat-input" class="sr-only">Your question</label>
+          <textarea id="chat-input" rows="1" placeholder="Ask a question about the contract…"></textarea>
+          <button id="send-btn" type="submit" class="btn-primary" disabled>Send</button>
+        </form>
+        <p class="composer-hint">Enter to send · Shift+Enter for a new line</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
